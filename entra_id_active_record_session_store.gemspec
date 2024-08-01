@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
     Dir['{lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
   end
 
+  s.add_dependency('activerecord', '~> 7.0.8')
   s.add_dependency 'activerecord-session_store', '~> 2.0'
   s.add_dependency 'rack_entra_id_auth', '~> 1.0'
 
