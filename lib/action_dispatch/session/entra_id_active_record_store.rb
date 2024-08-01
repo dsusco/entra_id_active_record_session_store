@@ -6,7 +6,7 @@ module ActionDispatch
       private
 
         def write_session(request, sid, session_data, options)
-          entra_id_request = EntraIdRequest.new(request)
+          entra_id_request = RackEntraIdAuth::EntraIdRequest.new(request)
 
           logger.silence do
             record, sid = get_session_model(request, sid)
@@ -33,7 +33,7 @@ module ActionDispatch
         end
 
         def delete_session(request, session_id, options)
-          entra_id_request = EntraIdRequest.new(request)
+          entra_id_request = RackEntraIdAuth::EntraIdRequest.new(request)
 
           logger.silence do
             if entra_id_request.logout_request?
