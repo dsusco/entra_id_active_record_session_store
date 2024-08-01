@@ -1,41 +1,33 @@
-# frozen_string_literal: true
+require_relative 'lib/entra_id_active_record_session_store/version'
 
-require_relative "lib/entra_id_active_record_session_store/version"
+Gem::Specification.new do |s|
+  s.name    = 'entra_id_active_record_session_store'
+  s.version = EntraIdActiveRecordSessionStore::VERSION
+  s.authors = ['David Susco']
+  s.email   = ['dsusco@clarku.edu']
 
-Gem::Specification.new do |spec|
-  spec.name = "entra_id_active_record_session_store"
-  spec.version = EntraIdActiveRecordSessionStore::VERSION
-  spec.authors = ["David Susco"]
-  spec.email = ["dsusco@clarku.edu"]
+  s.summary     = 'A subclass of Active Record Session Store that tracks sessionindexes for single logout.'
+  s.description = s.summary
+  s.homepage    = 'https://github.com/dsusco/entra_id_active_record_session_store'
+  s.license     = 'MIT'
 
-  spec.summary = "TODO: Write a short summary, because RubyGems requires one."
-  spec.description = "TODO: Write a longer description or delete this line."
-  spec.homepage = "TODO: Put your gem's website or public repo URL here."
-  spec.license = "MIT"
-  spec.required_ruby_version = ">= 3.0.0"
+  s.required_ruby_version = '>= 3.0.0'
 
-  spec.metadata["allowed_push_host"] = "TODO: Set to your gem server 'https://example.com'"
+  s.metadata = {
+    'bug_tracker_uri'   => "#{s.homepage}/issues",
+    'changelog_uri'     => "#{s.homepage}/releases/tag/v#{s.version}",
+    'homepage_uri'      => s.homepage,
+    'source_code_uri'   => s.homepage
+  }
 
-  spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = "TODO: Put your gem's public repo URL here."
-  spec.metadata["changelog_uri"] = "TODO: Put your gem's CHANGELOG.md URL here."
-
-  # Specify which files should be added to the gem when it is released.
-  # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
-  gemspec = File.basename(__FILE__)
-  spec.files = IO.popen(%w[git ls-files -z], chdir: __dir__, err: IO::NULL) do |ls|
-    ls.readlines("\x0", chomp: true).reject do |f|
-      (f == gemspec) ||
-        f.start_with?(*%w[bin/ test/ spec/ features/ .git .github appveyor Gemfile])
-    end
+  s.files = Dir.chdir(File.expand_path(__dir__)) do
+    Dir['{lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
   end
-  spec.bindir = "exe"
-  spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
-  spec.require_paths = ["lib"]
 
-  # Uncomment to register a new dependency of your gem
-  # spec.add_dependency "example-gem", "~> 1.0"
+  s.add_dependency 'activerecord-session_store', '~> 2.0'
+  s.add_dependency 'rack_entra_id_auth', '~> 1.0'
 
-  # For more information and examples about making a new gem, check out our
-  # guide at: https://bundler.io/guides/creating_gem.html
+  s.add_development_dependency 'minitest', '~> 5.16'
+  s.add_development_dependency 'rake', '~> 13.0'
+  s.add_development_dependency 'rubocop', '~> 1.21'
 end

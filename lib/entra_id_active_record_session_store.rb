@@ -1,8 +1,4 @@
-# frozen_string_literal: true
-
-require_relative "entra_id_active_record_session_store/version"
+require 'rack_entra_id_auth'
 
 module EntraIdActiveRecordSessionStore
-  class Error < StandardError; end
-  # Your code goes here...
 end
