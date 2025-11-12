@@ -1,4 +1,4 @@
-#ruby=3.3.6
+#ruby=3.4.7
 #ruby-gemset=entra_id_active_record_session_store
 source 'https://rubygems.org'
 
