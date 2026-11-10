@@ -26,6 +26,6 @@ Gem::Specification.new do |s|
   end
 
   s.add_dependency 'activerecord', '>= 7.2', '< 9'
-  s.add_dependency 'activerecord-session_store', '~> 2.0'
+  s.add_dependency 'activerecord-session_store', '~> 2.2'
   s.add_dependency 'rack_entra_id_auth', '~> 1.4'
 end

@@ -6,11 +6,16 @@ module EntraIdActiveRecordSessionStore
     class MigrationGenerator < Rails::Generators::Base
       include Rails::Generators::Migration
 
-      argument :file_name, :type => :string, :default => 'create_sessions'
+      argument :file_name, type: :string, default: 'create_sessions'
 
       desc 'Create a migration to create a sessions table with a sessionindex column.'
 
       source_root File.expand_path('templates', __dir__)
+
+      # Rails::Generators::Migration calls this to number the migration file.
+      def self.next_migration_number (dirname)
+        ActiveRecord::Generators::Base.next_migration_number(dirname)
+      end
 
       def create_sessions_migration
         migration_template 'create_sessions_migration.rb', Rails.root.join('db', 'migrate', "#{file_name}.rb")
@@ -18,14 +23,10 @@ module EntraIdActiveRecordSessionStore
 
       protected
 
-        def self.next_migration_number (dirname)
-          ActiveRecord::Generators::Base.next_migration_number(dirname)
-        end
-
         def session_table_name
           current_table_name = ActiveRecord::SessionStore::Session.table_name
 
-          if current_table_name == 'session' || current_table_name == 'sessions'
+          if %w[session sessions].include?(current_table_name)
             current_table_name = ActiveRecord::Base.pluralize_table_names ? 'sessions' : 'session'
           end
 
