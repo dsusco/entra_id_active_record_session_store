@@ -3,6 +3,8 @@ AllCops:
   NewCops: enable
   SuggestExtensions: false
   Exclude:
+    # setting Exclude replaces RuboCop's defaults, so vendor/ has to be listed
+    - vendor/**/*
     # ERB templates for generated files, not Ruby
     - lib/generators/**/templates/**/*
 
